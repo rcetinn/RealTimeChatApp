@@ -1,0 +1,58 @@
+﻿@model IEnumerable<RealTimeChatApp.Models.Channel>
+<style>
+    div.panel-body {
+        overflow: scroll;
+        background: url('http://subtlepatterns.com/patterns/geometry2.png');
+    }
+</style>
+
+@section Scripts{
+
+
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/Chat.js"></script>
+}
+
+
+<div class="row">
+    <div class="column">
+        <div class="chat-panel panel panel-default">
+            <div class="panel-heading">
+                Chat Box
+                <i class="fa fa-paper-plane fa-fw"></i>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body" id="chat" style=" min-height:400px;">
+                <input type="hidden" id="displayname" />
+                <p id="discussion"></p>
+            </div>
+            <!-- /.panel-body -->
+            <div class="panel-footer">
+                <div class="input-group">
+                    <input id="message" type="text" name="message" class="form-control input-sm" placeholder="Type your message here..." disabled />
+                    <span class="input-group-btn">
+                        <input type="button" class="btn btn-warning btn-sm" id="sendmessage" value="Send" disabled>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="col-md-12 float-right">
+            <input class="form-control form-control-lg " type="text" placeholder="Please enter your nickname..." id="nickNameText" />
+            @*<button type="button" class="btn btn-warning btn-md pull-right" style="margin:10px" id="loginButton">Login</button>*@
+        <select id="channels" class="form-control" size="20" aria-label="size 15 select example" disabled style="margin-top:10px;">
+            @{
+                foreach (var item in Model)
+                {
+                    <option value=@item.ChannelId data-value="@item.ChannelId">@item.ChannelName</option>
+                }
+
+            }           
+        </select>
+            <button type="button" class="btn btn-warning btn-md pull-right" style="margin:10px" id="loginButton">Login</button>
+        </div>
+    </div>
+</div>
+
